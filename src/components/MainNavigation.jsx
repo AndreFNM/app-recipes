@@ -1,5 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
+import Logout from '../components/Authentication/Logout';
+import useAuth from "./Authentication/useAuth";
 
 function MainNavigation() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -7,6 +9,8 @@ function MainNavigation() {
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen); 
     };
+
+    const isAuth = useAuth();
 
     return(
     <header className="bg-white bg-opacity-70 backdrop-blur-md shadow-md fixed w-full top-0 z-10">
@@ -18,26 +22,50 @@ function MainNavigation() {
                         Home
                     </NavLink>
                 </li>
+                {isAuth ?
                 <li>
                     <NavLink to="favourites" className="text-gray-800 hover:text-blue-500 transition duration-300">
                         Favourites
                     </NavLink>
-                </li>
-                <li>
+                </li> 
+                :
+                <>
+
+                </>
+                 }
+                
+                {isAuth ? 
+                    <li>
                     <NavLink to="myRecipes" className="text-gray-800 hover:text-blue-500 transition duration-300">
                         My Recipes
                     </NavLink>
-                </li>
+                </li> :
+                <></>
+                }
+                
                 <li>
                     <NavLink to="searchRecipes" className="text-gray-800 hover:text-blue-500 transition duration-300">
-                        Search
+                        <input 
+                            type="text" 
+                            placeholder="Search..." 
+                            className="w-[150px] border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                            />
                     </NavLink>
                 </li>
+                {isAuth ? <>
+                    <li>
+                    <Logout />
+                </li>
+                </>
+                :
+                <>
                 <li>
                     <NavLink to="auth" className="text-gray-800 hover:text-blue-500 transition duration-300">
                         Authentication
                     </NavLink>
                 </li>
+                </>
+                }
             </ul>
             {/* Mobile Menu Button */}
             <div className="md:hidden">
@@ -58,26 +86,49 @@ function MainNavigation() {
                                 Home
                             </NavLink>
                         </li>
-                        <li>
-                            <NavLink to="/favourites" className="text-gray-800 hover:text-blue-500 transition duration-300" onClick={toggleMenu}>
-                                Favourites
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/myRecipes" className="text-gray-800 hover:text-blue-500 transition duration-300" onClick={toggleMenu}>
-                                My Recipes
-                            </NavLink>
-                        </li>
+                        {isAuth ?
+                <li>
+                    <NavLink to="favourites" className="text-gray-800 hover:text-blue-500 transition duration-300">
+                        Favourites
+                    </NavLink>
+                </li> 
+                :
+                <>
+
+                </>
+                 }
+                
+                {isAuth ? 
+                    <li>
+                    <NavLink to="myRecipes" className="text-gray-800 hover:text-blue-500 transition duration-300">
+                        My Recipes
+                    </NavLink>
+                </li> :
+                <></>
+                }
                         <li>
                             <NavLink to="/searchRecipes" className="text-gray-800 hover:text-blue-500 transition duration-300" onClick={toggleMenu}>
-                                Search
+                            <input 
+                                type="text" 
+                                placeholder="Search..." 
+                                className="w-[150px] border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                            />
                             </NavLink>
                         </li>
-                        <li>
-                            <NavLink to="/auth" className="text-gray-800 hover:text-blue-500 transition duration-300" onClick={toggleMenu}>
-                                Authentication
-                            </NavLink>
-                        </li>
+                        {isAuth ? <>
+                    <li>
+                    <Logout />
+                </li>
+                </>
+                :
+                <>
+                <li>
+                    <NavLink to="auth" className="text-gray-800 hover:text-blue-500 transition duration-300">
+                        Authentication
+                    </NavLink>
+                </li>
+                </>
+                }
                     </ul>
                 </div>
             )}
