@@ -10,6 +10,10 @@ import FavouritesPage from './pages/Favourites';
 import MyRecipesPage from './pages/MyRecipes';
 import SearchRecipesPage from './pages/SearchRecipes';
 import Authentication from './pages/Authentication';
+import Profile from './pages/Profile';
+import {AuthProvider} from './components/Authentication/AuthContext.jsx';
+import VerifyEmail from './pages/VerifyEmail';
+import ProtectedRoute from "./components/Authentication/ProtectedRoute.jsx";
 
 const router = createBrowserRouter([
 {
@@ -24,17 +28,29 @@ const router = createBrowserRouter([
       path: ':recipeId',
       children: [
         {index: true, element: <RecipeDetailPage />},
-        {path: 'edit', element: <EditRecipePage />}
+        {path: 'edit', element: (
+            <ProtectedRoute>
+              <EditRecipePage />
+            </ProtectedRoute>
+          )}
       ],
     },
 
     {path: 'favourites',
       children: [
-        {index: true, element: <FavouritesPage/>},
+        {index: true, element: (
+            <ProtectedRoute>
+              <FavouritesPage/>
+            </ProtectedRoute>
+          )},
         {path: ':recipeId',
           children:[
             {index: true, element: <RecipeDetailPage />},
-            {path: 'edit', element: <EditRecipePage />}
+            {path: 'edit', element: (
+                <ProtectedRoute>
+                  <EditRecipePage />
+                </ProtectedRoute>
+              )}
           ],
         },
       ],
@@ -42,14 +58,26 @@ const router = createBrowserRouter([
 
     {path: 'myRecipes',
       children: [
-        {index: true, element: <MyRecipesPage />},
+        {index: true, element: (
+            <ProtectedRoute>
+              <MyRecipesPage />
+            </ProtectedRoute>
+          )},
         {path: ':recipeId',
           children:[
             {index: true, element: <RecipeDetailPage />},
-            {path: 'edit', element: <EditRecipePage />}
+            {path: 'edit', element: (
+                <ProtectedRoute>
+                  <EditRecipePage />
+                </ProtectedRoute>
+              )}
           ],
         },
-        {path: 'newRecipe', element: <CreateRecipePage />},
+        {path: 'newRecipe', element: (
+            <ProtectedRoute>
+              <CreateRecipePage />
+            </ProtectedRoute>
+          )},
       ],
     },
 
@@ -59,11 +87,27 @@ const router = createBrowserRouter([
         {path: ':recipeId',
           children:[
             {index: true, element: <RecipeDetailPage />},
-            {path: 'edit', element: <EditRecipePage />}
+            {path: 'edit', element: (
+                <ProtectedRoute>
+                  <EditRecipePage />
+                </ProtectedRoute>
+              )}
           ],
         },
-        {path: 'newRecipe', element: <CreateRecipePage />},
+        {path: 'newRecipe', element: (
+            <ProtectedRoute>
+              <CreateRecipePage />
+            </ProtectedRoute>
+          )},
       ],
+    },
+    {
+      path: 'profile',
+      element: (
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+      )
     },
 
     {
@@ -72,6 +116,14 @@ const router = createBrowserRouter([
     },
     {
       path: 'logout',
+    },
+    {
+      path: "error",
+      element: <ErrorPage />,
+    },
+    {
+      path: 'verify-email',
+      element: <VerifyEmail />,
     }
 
 
@@ -80,7 +132,11 @@ const router = createBrowserRouter([
 ])
 
 function App() {
-  return <RouterProvider router={router} />
+  return (
+     <AuthProvider>
+        <RouterProvider router={router} />;
+     </AuthProvider>)
+
 }
 
 export default App

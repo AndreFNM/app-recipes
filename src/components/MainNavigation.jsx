@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import Logout from '../components/Authentication/Logout';
-import useAuth from "./Authentication/useAuth";
+import {useAuth} from "./Authentication/AuthContext.jsx";
 
 function MainNavigation() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,7 +15,9 @@ function MainNavigation() {
     return(
     <header className="bg-white bg-opacity-70 backdrop-blur-md shadow-md fixed w-full top-0 z-10">
         <nav className="max-w-7xl mx-auto p-4 flex justify-between items-center">
-        <div className="text-2xl font-bold text-gray-800">Recipes App</div> 
+            <div className="text-2xl font-bold text-gray-800">
+              <NavLink to="/">Recipes App</NavLink>
+            </div>
             <ul className="hidden md:flex space-x-8 text-lg">
                 <li>
                     <NavLink to="/" className="text-gray-800 hover:text-blue-500 transition duration-300">
@@ -42,7 +44,16 @@ function MainNavigation() {
                 </li> :
                 <></>
                 }
-                
+
+                {isAuth ? 
+                    <li>
+                    <NavLink to="profile" className="text-gray-800 hover:text-blue-500 transition duration-300">
+                        Profile
+                    </NavLink>
+                </li> :
+                <></>
+                }
+
                 <li>
                     <NavLink to="searchRecipes" className="text-gray-800 hover:text-blue-500 transition duration-300">
                         <input 
@@ -102,6 +113,15 @@ function MainNavigation() {
                     <li>
                     <NavLink to="myRecipes" className="text-gray-800 hover:text-blue-500 transition duration-300">
                         My Recipes
+                    </NavLink>
+                </li> :
+                <></>
+                }
+
+                {isAuth ? 
+                    <li>
+                    <NavLink to="profile" className="text-gray-800 hover:text-blue-500 transition duration-300">
+                        Profile
                     </NavLink>
                 </li> :
                 <></>

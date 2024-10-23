@@ -1,7 +1,7 @@
 import LoginWithGoogle from "../components/Authentication/LoginWithGoogle";
 import LoginWithEmail from "../components/Authentication/LoginWithEmail";
 import RegisterWithEmail from "../components/Authentication/RegisterWithEmail";
-import useAuth from "../components/Authentication/useAuth";
+import {useAuth} from "../components/Authentication/AuthContext.jsx";
 import Logout from "../components/Authentication/Logout";
 import { useState } from "react";
 
