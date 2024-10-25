@@ -35,7 +35,7 @@ function LoginWithEmail() {
 
     return (
         <form onSubmit={handleLogin}>
-            <div className="flex items-center justify-between space-x-3">
+            <div className="flex flex-col items-center justify-between space-y-5">
                 <input
                     type="email"
                     value={email}
@@ -45,7 +45,7 @@ function LoginWithEmail() {
                     }}
                     placeholder="Email"
                     required
-                    className="border p-2"
+                    className="border-b border-gray-900 p-2 w-full text-lg bg-transparent text-gray-700 placeholder-gray-400 focus:outline-none  focus:ring-sky-500 rounded-md"
                 />
                 <input
                     type="password"
@@ -56,9 +56,9 @@ function LoginWithEmail() {
                     }}
                     placeholder="Password"
                     required
-                    className="border p-2"
+                    className="border-b border-gray-900 p-2 w-full text-lg bg-transparent text-gray-700 placeholder-gray-400 focus:outline-none  focus:ring-sky-500 rounded-md"
                 />
-                <button type="submit" className="bg-sky-500 text-white px-4 py-2 rounded-lg hover:bg-sky-600"
+                <button type="submit" className="bg-sky-600 text-white px-4 py-2 rounded-lg hover:bg-sky-700"
                 disabled={loading}
                 >
                     {loading ? "Logging in..." : "Login"}

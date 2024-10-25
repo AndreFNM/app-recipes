@@ -59,7 +59,7 @@ function MainNavigation() {
                         <input 
                             type="text" 
                             placeholder="Search..." 
-                            className="w-[150px] border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                            className="w-[150px] borderless border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" 
                             />
                     </NavLink>
                 </li>
@@ -131,7 +131,7 @@ function MainNavigation() {
                             <input 
                                 type="text" 
                                 placeholder="Search..." 
-                                className="w-[150px] border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                                className="w-[150px] borderless border-gray-300 rounded-md focus:outline-none focus:ring-blue-500" 
                             />
                             </NavLink>
                         </li>
